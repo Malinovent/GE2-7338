@@ -14,8 +14,7 @@ public class PlayerLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         RotateCamera();
@@ -24,9 +23,11 @@ public class PlayerLook : MonoBehaviour
     private void RotateCamera()
     {
         Vector2 input = InputManager.turnInput;
+        
         // Rotating around the Y-axis (left and right)
         transform.Rotate(Vector3.up * (input.x * sensitivity));
 
+        // Rotating around the X-axis (up and down)
         xRotation -= input.y; 
         xRotation = Mathf.Clamp(xRotation, -yClamp, yClamp); // Clamping to prevent over-rotation
 
