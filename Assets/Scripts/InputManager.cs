@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
     private void Move(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>();
-        Debug.Log("Movement input performed " + movementInput);
+        //Debug.Log("Movement input performed " + movementInput);
     }
 
     private void Turn(InputAction.CallbackContext ctx)
