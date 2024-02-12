@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactor : MonoBehaviour
+public class InterfactorRaycast : MonoBehaviour
 {
     
     private IInteractable _currentInteractable;
@@ -40,27 +40,10 @@ public class Interactor : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * raycastDistance);
+        Gizmos.DrawRay(ray.origin, ray.direction * raycastDistance);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        IInteractable interactable = other.GetComponent<IInteractable>();
-
-        if (interactable != null)
-        {
-            _currentInteractable = interactable;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IInteractable interactable = other.GetComponent<IInteractable>();
-        
-        if(interactable == _currentInteractable)
-        {
-            _currentInteractable = null;
-        }
-    }
+  
 }
