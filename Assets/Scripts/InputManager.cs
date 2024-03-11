@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class InputManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class InputManager : MonoBehaviour
     public static Vector2 movementInput;
     public static Vector2 turnInput;
     public static bool isAimingInput = false;
+
+    public static event Action OnJumpInput;
 
     private void Awake()
     {
@@ -27,6 +30,9 @@ public class InputManager : MonoBehaviour
 
         controls.Player.Aiming.performed += ctx => isAimingInput = true;
         controls.Player.Aiming.canceled += ctx => isAimingInput = false;
+        
+        controls.Player.Jump.performed += _ => OnJumpInput?.Invoke();
+        //OnJumpInput += () => Debug.Log("Jump input received");
 
         controls.Player.Enable();
     }
@@ -50,5 +56,5 @@ public class InputManager : MonoBehaviour
     {
         turnInput = ctx.ReadValue<Vector2>();
     }
-
+    
 }

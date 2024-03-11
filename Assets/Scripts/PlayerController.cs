@@ -76,4 +76,14 @@ public class PlayerController : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         rb.rotation = targetRotation;
     }
+
+    private void Jump()
+    {
+        
+    }
+
+    private void OnEnable()
+    {
+        InputManager.OnJumpInput += () => Jump();
+    }
 }
