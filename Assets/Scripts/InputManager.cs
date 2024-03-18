@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     public static bool isAimingInput = false;
 
     public static event Action OnJumpInput;
+    public static event Action OnToggleInventoryInput;
 
     private void Awake()
     {
@@ -22,6 +23,8 @@ public class InputManager : MonoBehaviour
 
     void OnEnable()
     {
+        controls.Player.ToggleInventory.performed += _ => OnToggleInventoryInput?.Invoke();
+        
         controls.Player.Move.performed += Move;
         controls.Player.Move.canceled += Move;
 
